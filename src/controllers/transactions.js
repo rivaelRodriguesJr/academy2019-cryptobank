@@ -1,4 +1,5 @@
 const { Deposit, Payment, Transference, User } = require('../models')
+const service = require('../services/UserService')
 const users = []
 
 const user = new User( { email:'rivael@gmail.com', password:'senha@123' })
@@ -7,8 +8,8 @@ users.push(user)
 const create_user = (request, response) => {
     const { email, password} = request.body
     const user = new User({ email, password })
-    users.push(user)
-
+    service.create_user(user)
+    
     response.status(201).json()
 }
 
@@ -23,4 +24,4 @@ const deposit = (request, response) => {
     response.status(201).json(deposit)
 }
 
-module.exports = { show_income, deposit }
+module.exports = { show_income, deposit, create_user }
